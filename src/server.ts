@@ -1,13 +1,16 @@
 import Fastify, { FastifyInstance, RouteShorthandOptions } from "fastify";
 import { Server, IncomingMessage, ServerResponse } from "http";
-
-const server: FastifyInstance = Fastify({});
+import { router } from "./routes/routes";
 
 interface Options {
   port: number;
 }
 
+const server: FastifyInstance<Server> = Fastify({});
+
 export const start = async (options: Options) => {
+  // Routes
+  server.register(router, { prefix: "/api" });
   try {
     await server.listen({ port: options.port });
 
