@@ -1,11 +1,18 @@
 import { FastifyPluginCallback } from "fastify";
+import {
+  createUser,
+  deleteUser,
+  getAllUsers,
+  getUserById,
+  updateUser,
+} from "../controllers/users.controller";
 
 export const userRouter: FastifyPluginCallback = (fastify, opts, done) => {
-  fastify.get("/", () => {});
-  fastify.get("/:id", () => {});
-  fastify.post("/", () => {});
-  fastify.put("/:id", () => {});
-  fastify.delete("/:id", () => {});
+  fastify.get("/", getAllUsers);
+  fastify.get("/:id", getUserById);
+  fastify.post("/", createUser);
+  fastify.put("/:id", updateUser);
+  fastify.delete("/:id", deleteUser);
 
   done();
 };
